@@ -180,5 +180,5 @@ conn.logger.level = 'debug'
 
  [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![rthelolchex](https://github.com/rthelolchex.png?size=100)](https://github.com/rthelolchex)
 ----|----
-[Nurutomo](https://github.com/Nurutomo) | [Ariffb](https://github.com/rthelolchex)
+[Nurutomo](https://github.com/Nurutomo) | [rthelolchex](https://github.com/rthelolchex)
  Penulis / Pencipta | Recode / Remake
