@@ -1,8 +1,8 @@
-# wabot-aq
+# exbot-project
 
-Simple WhatsApp Bot
+Simple WhatsApp Bot, recode from script wabot-aq by @Nurutomo
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Nurutomo/wabot-aq)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/rthelolchex/exbot-project)
 
 ## FOR TERMUX/UBUNTU/SSH USER
 
@@ -41,7 +41,7 @@ apt install wget curl git ffmpeg imagemagick build-essential libcairo2-dev libpa
 
 ---------
 
-[ INSTALLING NODEJS & WABOT-AQ ]
+[ INSTALLING NODEJS & exbot-project ]
 
 ```bash
 ubuntu
@@ -63,8 +63,8 @@ npm update
 * Download And Install ImageMagick [`Click Here`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/Nurutomo/wabot-aq
-cd wabot-aq
+git clone https://github.com/rthelolchex/exbot-project
+cd exbot-project
 npm install
 npm update
 ```
@@ -156,6 +156,10 @@ If enabled, all incoming messages will be marked as read
 
 No bot, just print received messages and add users to database
 
+### `--nomsg`
+
+No message printed, except error occured
+
 ### `--test`
 
 **Development** Testing Mode
@@ -174,10 +178,7 @@ conn.logger.level = 'debug'
 
 ---------
 
-<a href="https://api.xteam.xyz"><img src="https://i.ibb.co/7j0vtwz/xlogo.png" width="100" height="100"></a> | [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![Ariffb](https://github.com/ariffb25.png?size=100)](https://github.com/ariffb25) | [![Ftwrr](https://github.com/Ftwrr.png?size=100)](https://github.com/Ftwrr) 
-----|----|----|----
-[XTEAM](https://api.xteam.xyz/) | [Nurutomo](https://github.com/Nurutomo) | [Ariffb](https://github.com/ariffb25) | [Ftwrr](https://github.com/Ftwrr)
-Powered by XTEAM | Author / Creator | Most Active Contributor | 2nd Most Active Contributor
-
-
-NOTE: This project will not maintained after `27 June 2021`, that means no update. Feel free to anyone to continue this project :)
+ [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![Ariffb](https://github.com/ariffb25.png?size=100)](https://github.com/ariffb25)
+----|----
+[Nurutomo](https://github.com/Nurutomo) | [Ariffb](https://github.com/ariffb25)
+ Penulis / Pencipta | Penulis ulang
