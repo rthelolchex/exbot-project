@@ -42,6 +42,7 @@ global.db = new Low(
 global.DATABASE = global.db // Backwards Compatibility
 
 global.conn = new WAConnection()
+conn.browserDescription = ["ExBot - Project", "Desktop", "10.0"]
 let authFile = `${opts._[0] || 'session'}.data.json`
 if (fs.existsSync(authFile)) conn.loadAuthInfo(authFile)
 if (opts['trace']) conn.logger.level = 'trace'
@@ -168,7 +169,7 @@ for (let filename of fs.readdirSync(pluginFolder).filter(pluginFilter)) {
     delete global.plugins[filename]
   }
 }
-console.log(Object.keys(global.plugins))
+conn.logger.info("All commands has been loaded!")
 global.reload = (_event, filename) => {
   if (pluginFilter(filename)) {
     let dir = path.join(pluginFolder, filename)

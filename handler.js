@@ -114,10 +114,11 @@ module.exports = {
       let isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
       let groupMetadata = m.isGroup ? this.chats.get(m.chat).metadata || await this.groupMetadata(m.chat) : {} || {}
       let participants = m.isGroup ? groupMetadata.participants : [] || []
-      let user = m.isGroup ? participants.find(u => u.jid == m.sender) : {} // User Data
-      let bot = m.isGroup ? participants.find(u => u.jid == this.user.jid) : {} // Your Data
-      let isAdmin = user.isAdmin || user.isSuperAdmin || false // Is User Admin?
-      let isBotAdmin = bot.isAdmin || bot.isSuperAdmin || false // Are you Admin?
+      let user = m.isGroup ? participants.find(u => u.jid == m.sender) : {} // Data pengguna
+      let bot = m.isGroup ? participants.find(u => u.jid == this.user.jid) : {} // Data anda
+      let isAdmin = user.isAdmin || user.isSuperAdmin || false // Apakah pengguna admin?
+      let isBotAdmin = bot.isAdmin || bot.isSuperAdmin || false // Apakah anda admin?
+      if (!isOwner && opts['owneronly']) return // Ntah kenapa gabisa difix diatas, mager juga w btw
       for (let name in global.plugins) {
         let plugin = global.plugins[name]
         if (!plugin) continue
@@ -160,7 +161,7 @@ module.exports = {
           let _args = noPrefix.trim().split` `.slice(1)
           let text = _args.join` `
           command = (command || '').toLowerCase()
-          let fail = plugin.fail || global.dfail // When failed
+          let fail = plugin.fail || global.dfail // Ketika gagal
           let isAccept = plugin.command instanceof RegExp ? // RegExp Mode?
             plugin.command.test(command) :
             Array.isArray(plugin.command) ? // Array?
@@ -177,18 +178,18 @@ module.exports = {
           if (m.chat in global.db.data.chats || m.sender in global.db.data.users) {
             let chat = global.db.data.chats[m.chat]
             let user = global.db.data.users[m.sender]
-            if (name != 'unbanchat.js' && chat && chat.isBanned) return // Except this
+            if (name != 'unbanchat.js' && chat && chat.isBanned) return // Kecualikan ini, yang dibawah bisa dipake juga
             if (name != 'unbanuser.js' && user && user.banned) return
           }
-          if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
+          if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Keduanya owner
             fail('owner', m, this)
             continue
           }
-          if (plugin.rowner && !isROwner) { // Real Owner
+          if (plugin.rowner && !isROwner) { // Owner asal
             fail('rowner', m, this)
             continue
           }
-          if (plugin.owner && !isOwner) { // Number Owner
+          if (plugin.owner && !isOwner) { // Nomor owner
             fail('owner', m, this)
             continue
           }
@@ -203,14 +204,14 @@ module.exports = {
           if (plugin.group && !m.isGroup) { // Group Only
             fail('group', m, this)
             continue
-          } else if (plugin.botAdmin && !isBotAdmin) { // You Admin
+          } else if (plugin.botAdmin && !isBotAdmin) { // Anda Admin
             fail('botAdmin', m, this)
             continue
-          } else if (plugin.admin && !isAdmin) { // User Admin
+          } else if (plugin.admin && !isAdmin) { // Pengguna Admin
             fail('admin', m, this)
             continue
           }
-          if (plugin.private && m.isGroup) { // Private Chat Only
+          if (plugin.private && m.isGroup) { // Chat pribadi saja
             fail('private', m, this)
             continue
           }
@@ -229,7 +230,7 @@ module.exports = {
           }
           if (plugin.level > _user.level) {
             this.reply(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`, m)
-            continue // If the level has not been reached
+            continue // Jika level tidak tercapai
           }
           let extra = {
             match,
@@ -255,7 +256,7 @@ module.exports = {
             await plugin.call(this, m, extra)
             if (!isPrems) m.limit = m.limit || plugin.limit || false
           } catch (e) {
-            // Error occured
+            // Jika terjadi error
             m.error = e
             console.error(e)
             if (e) {

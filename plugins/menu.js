@@ -30,15 +30,16 @@ let tags = {
 }
 const defaultMenu = {
   before: `
-╒══《 %me 》═══
+╭───《 %me 》───
 ├────────────────────
 ╞═══ 《 *USER INFO* 》 ═══
 ├────────────────────
-│ Hai, %name!
-│ Tersisa *%limit Limit*
-│ Role *%role*
-│ Level *%level (%exp / %maxexp)* [%xp4levelup lagi untuk levelup]
-│ %totalexp XP in Total
+│ Name : %name
+│ Limit tersisa : *%limit
+│ Role : *%role*
+│ Level : *%level (%exp / %maxexp)*
+│ [%xp4levelup lagi untuk levelup]
+│ Total XP : %totalexp XP
 ├────────────────────
 ╞═══ 《 *BOT STATS* 》 ═══
 ├────────────────────
@@ -47,7 +48,7 @@ const defaultMenu = {
 │ Waktu: *%time*
 │ Uptime: *%uptime (%muptime)*
 │ Database: %rtotalreg of %totalreg
-╘═══ 《 *Powered by %npmname* 》 ═══
+╰─── 《 *Powered by %npmname* 》 ───
 %readmore`.trimStart(),
   header: `
 ╭────────────────────
@@ -156,7 +157,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    conn.reply(m.chat, text.trim(), m)
+    conn.send2Button(m.chat, text.trim(), 'Made with hand by rthelolchex', 'Owner bot', '.owner', 'Donate', '.donate', { quoted: m })
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e

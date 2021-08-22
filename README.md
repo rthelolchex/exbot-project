@@ -160,6 +160,11 @@ No bot, just print received messages and add users to database
 
 No message printed, except error occured
 
+### `--owneronly`
+
+Same like --self, but if you have 2 number you can use this
+Or using it like maintenance mode.
+
 ### `--test`
 
 **Development** Testing Mode
