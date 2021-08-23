@@ -4,7 +4,8 @@ let handler = async (m, { conn, text, usedPrefix }) => {
     if (id in conn.vote) {
         throw `_Masih ada vote di chat ini!_\n\n*${usedPrefix}hapusvote* - untuk menghapus vote`
     }
-    m.reply(`Vote dimulai!\n\n*${usedPrefix}upvote* - untuk ya\n*${usedPrefix}devote* - untuk tidak\n*${usedPrefix}cekvote* - untuk mengecek vote\n*${usedPrefix}hapusvote* - untuk menghapus vote`)
+    let str = `Vote dimulai!\nSilahkan klik button dibawah untuk mulai vote atau untuk menghapus vote.`
+    conn.send3Button(m.chat, str, "Made with hand by rthelolchex", "Setuju", ".upvote", "Tidak setuju", ".devote", "Hapus vote", ".hapusvote")
     conn.vote[id] = [
         text,
         [],

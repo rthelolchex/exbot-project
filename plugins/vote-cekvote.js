@@ -1,3 +1,5 @@
+const path = require('path')
+const fs = require('fs')
 let handler = async (m, { conn, usedPrefix }) => {
     let id = m.chat
     conn.vote = conn.vote ? conn.vote : {}
@@ -5,23 +7,32 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let [reason, upvote, devote] = conn.vote[id]
     let mentionedJid = [...upvote, ...devote]
-    m.reply(`
-*「 VOTE 」*
-
-*Alasan:* ${reason}
-
-*UPVOTE*
-_Total: ${upvote.length}_
-${upvote.map(u => '@' + u.split('@')[0]).join('\n')}
-
-*DEVOTE*
-_Total: ${devote.length}_
-${devote.map(u => '@' + u.split('@')[0]).join('\n')}
-
-*${usedPrefix}hapusvote* - untuk menghapus vote
-
-_by ariffb_
-`.trim(), false, { contextInfo: { mentionedJid } })
+    let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
+    let npmname = package.name
+    let str = `
+╭────────────────────
+╞═══ 《 *VOTE* 》 ═══
+├────────────────────
+│ *Alasan:* ${reason}
+├────────────────────
+╞═══ 《 *UPVOTE* 》 ═══
+├────────────────────
+│ Total: ${upvote.length}
+│ ${upvote.map(u => '@' + u.split('@')[0]).join(`\n│ `)}
+├────────────────────
+╞═══ 《 *DEVOTE* 》 ═══
+├────────────────────
+│ Total: ${devote.length} 
+│ ${devote.map(u => '@' + u.split('@')[0]).join('\n')}
+├────────────────────
+│ Klik tombol dibawah jika ingin hapus vote
+│ Atau jika tombol sudah abu-abu,
+│ Silahkan ketik ${usedPrefix}upvote untuk setuju,
+│ ${usedPrefix}devote untuk tidak setuju,
+│ ${usedPrefix}deletevote untuk hapus vote.
+╰─── 《 *Powered by ${npmname}* 》 ───
+    `.trim()
+    conn.send3Button(m.chat, str, "Made with hand by rthelolchex", "Upvote", '.upvote', 'Devote', '.devote', 'Hapus vote', '.deletevote', { contextInfo: { mentionedJid } })
 }
 handler.help = ['cekvote']
 handler.tags = ['vote']

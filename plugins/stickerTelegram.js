@@ -2,6 +2,8 @@ const fetch = require('node-fetch')
 const { MessageType } = require('@adiwajshing/baileys')
 const { sticker } = require('../lib/sticker')
 let handler = async (m, { conn, args, usedPrefix, command }) => {
+    let packname = `Ini weem bang`
+    let author = `Ido | ExBot - Project`
     if (!args[0]) throw `*Perintah ini untuk mengambil stiker dari Telegram*\n\ncontoh:\n${usedPrefix + command} https://t.me/addstickers/menggokil`
     if (!args[0].match(/(https:\/\/t.me\/addstickers\/)/gi)) throw `*Link salah! Perintah ini untuk mengambil stiker dari Telegram*\n\ncontoh:\n${usedPrefix + command} https://t.me/addstickers/menggokil`
 
@@ -13,7 +15,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     m.reply(`*Total:* ${json.result.length}\n*Estimasi selesai:* ${json.result.length * 2} detik\n\n` + mes)
     for (let i of json.result) {
         stiker = await sticker(false, i, global.packname, global.author)
-        await conn.sendMessage(m.chat, stiker, MessageType.sticker, { quoted: m })
+        await conn.sendMessage(m.chat, stiker, MessageType.sticker)
         await delay(2000)
     }
 }

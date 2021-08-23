@@ -57,6 +57,7 @@ const defaultMenu = {
   body: '│ • %cmd %islimit %isPremium',
   footer: '╰────────────────────\n',
   after: `
+*Copyright by @Nurutomo*
 *%npmname@^%version*
 ${'```%npmdesc```'}
 `,

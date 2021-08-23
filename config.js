@@ -6,7 +6,7 @@ global.APIs = { // API Prefix
   nrtm: 'https://nurutomo.herokuapp.com',
   xteam: 'https://api.xteam.xyz',
   zahir: 'https://zahirr-web.herokuapp.com',
-  zeks: 'https://api.zeks.xyz',
+  zeks: 'https://api.zeks.me',
   pencarikode: 'https://pencarikode.xyz',
   LeysCoder: 'https://leyscoders-api.herokuapp.com',
   bg: 'http://bochil.ddns.net'
@@ -15,14 +15,14 @@ global.APIKeys = { // APIKey Here
   // 'https://website': 'apikey'
   'https://api.xteam.xyz': 'd90a9e986e18778b',
   'https://zahirr-web.herokuapp.com': 'zahirgans',
-  'https://api.zeks.xyz': 'apivinz',
+  'https://api.zeks.me': 'rthelolchex',
   'https://pencarikode.xyz': 'pais',
   'https://leyscoders-api.herokuapp.com': 'dappakntlll'
 }
 
 // Sticker WM
-global.packname = 'Ini weem bang'
-global.author = 'Ido | ExBot - Project'
+global.packname = `Ini weem bang`
+global.author = `Ido | ExBot - Project`
 
 global.multiplier = 69 // The higher, The harder levelup
 
