@@ -4,10 +4,10 @@ let handler = m => {
   let user = global.db.data.users[m.sender]
   if (!levelling.canLevelUp(user.level, user.exp, global.multiplier)) {
     let { min, xp, max } = levelling.xpRange(user.level, global.multiplier)
-    throw `
+    return m.reply(`
 Level *${user.level} (${user.exp - min}/${xp})*
 Kurang *${max - user.exp}* lagi!
-`.trim()
+`.trim())
   }
   let before = user.level * 1
 	while (levelling.canLevelUp(user.level, user.exp, global.multiplier)) user.level++

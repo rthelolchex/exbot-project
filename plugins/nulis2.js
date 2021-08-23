@@ -82,5 +82,5 @@ handler.fail = null
 
 module.exports = handler
 
-// BY MFARELS
+// Thanks to MFarelS for this command :)
 // https://GitHub.com/MFarelS/

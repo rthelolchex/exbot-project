@@ -25,12 +25,12 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
             let media = await conn.downloadAndSaveMediaMessage(q, filename)
             exec(`ffmpeg -i ${media} ${set} ${filename}`, async (err, stderr, stdout) => {
                 await fs.unlinkSync(media)
-                if (err) throw `_*Error!*_`
+                if (err) return m.reply(`_*Error!*_`)
                 let buff = await fs.readFileSync(filename)
                 conn.sendFile(m.chat, buff, ran, null, m, /vn/.test(args[0]), { quoted: m, mimetype: 'audio/mp4' })
                 await fs.unlinkSync(filename)
             })
-        } else throw `Balas vn/audio yang ingin diubah dengan caption *${usedPrefix + command}*`
+        } else m.reply(`Balas vn/audio yang ingin diubah dengan caption *${usedPrefix + command}*`)
     } catch (e) {
         throw e
     }

@@ -10,7 +10,7 @@ let handler = async (m, { conn, args }) => {
     let mime = (q.msg || q).mimetype || ''
     if (/image/.test(mime)) {
       let img = await q.download()
-      if (!img) throw `Foto tidak ditemukan`
+      if (!img) return m.reply(`Foto tidak ditemukan`)
      conn.updateProfilePicture (bot, img)
     conn.reply(m.chat, 'Sukses Mengganti Foto Profile Bot!', m)
 	}

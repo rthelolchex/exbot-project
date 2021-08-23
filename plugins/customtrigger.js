@@ -27,5 +27,4 @@ handler.help = ['ctrigger <text>']
 handler.tags = ['sticker']
 handler.command = /^(custom|c)trigger$/i
 handler.limit = true
-//MADEbyAnshul
 module.exports = handler

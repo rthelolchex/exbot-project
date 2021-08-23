@@ -3,7 +3,7 @@ let handler = async (m, { conn }) => {
     let id = m.chat
     if (!(id in conn.tebakgambar)) throw false
     let json = conn.tebakgambar[id][1]
-    m.reply('```' + json.result.jawaban.replace(/[BCDFGHJKLMNPQRSTVWXYZ]/g, '_') + '```')
+    m.reply('```' + json.result.jawaban.replace(/[BDGJLNQSVXZ]/g, '_') + '```')
 }
 handler.command = /^hint$/i
 

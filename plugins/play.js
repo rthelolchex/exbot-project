@@ -3,11 +3,11 @@ let yts = require('yt-search')
 let fetch = require('node-fetch')
 const { servers, yta, ytv } = require('../lib/y2mate')
 let handler = async (m, { conn, command, text, isPrems, isOwner }) => {
-  if (!text) throw 'Cari apa?'
+  if (!text) return m.reply('Cari apa?')
   let chat = global.db.data.chats[m.chat]
   let results = await yts(text)
   let vid = results.all.find(video => video.seconds < 3600)
-  if (!vid) throw 'Video/Audio Tidak ditemukan'
+  if (!vid) return m.reply('Video/Audio Tidak ditemukan')
   let isVideo = /2$/.test(command)
   let yt = false
   let usedServer = servers[0]
@@ -21,7 +21,7 @@ let handler = async (m, { conn, command, text, isPrems, isOwner }) => {
       m.reply(`Server ${server} error!${servers.length >= i + 1 ? '' : '\nmencoba server lain...'}`)
     }
   }
-  if (yt === false) throw 'Semua server tidak bisa :/'
+  if (yt === false) return m.reply('Semua server tidak bisa :/')
   let { dl_link, thumb, title, filesize, filesizeF } = yt
   let isLimit = (isPrems || isOwner ? 99 : limit) * 1024 < filesize
   conn.sendFile(m.chat, thumb, 'thumbnail.jpg', `

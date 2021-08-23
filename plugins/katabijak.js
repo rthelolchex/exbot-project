@@ -12,7 +12,6 @@ Opsi Tersedia:
 • pernikahan
 • kemerdekaan
 
-by Ariffb, thanks to Wildan Izzudin
 https://neoxr-api.herokuapp.com/docs`
     if (!args[0]) throw er
     switch (args[0].toLowerCase()) {
@@ -42,3 +41,5 @@ handler.tags = ['internet']
 handler.command = /^(katabijak|jagokata)$/i
 
 module.exports = handler
+
+// Thanks for the command by Ariffb, thanks to Wildan Izzudin

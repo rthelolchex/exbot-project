@@ -5,8 +5,8 @@ const fetch = require('node-fetch')
 let handler = async (m, { conn, usedPrefix }) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || ''
-  if (!mime) throw `Reply Foto/Kirim Foto Dengan Caption ${usedPrefix}wait`
-  if (!/image\/(jpe?g|png)/.test(mime)) throw `Mime ${mime} tidak support`
+  if (!mime) return m.reply(`Reply Foto/Kirim Foto Dengan Caption ${usedPrefix}wait`)
+  if (!/image\/(jpe?g|png)/.test(mime)) return m.reply(`Mime ${mime} tidak support`)
   let img = await q.download()
   await m.reply('Searching Anime Titles...')
   let anime = `data:${mime};base64,${img.toString('base64')}`

@@ -11,7 +11,7 @@ let spotifyinfo = `✨️ *Title:* ${title}
 🗣️ *Artists:* ${artists}
 🎆️ *Album:* ${album}
 🌐️ *URL*: ${url}
-💚️ *Direct URL:* ${preview_mp3}\n\n@TOXIC-DEVIL`
+💚️ *Direct URL:* ${preview_mp3}`
 
   await conn.sendFile(m.chat, thumb, '', spotifyinfo, m)
   await conn.sendFile(m.chat, preview_mp3, 'spotify.mp3', spotifyinfo, m)

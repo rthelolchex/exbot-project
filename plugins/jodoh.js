@@ -2,12 +2,12 @@ const fetch = require('node-fetch')
 const { MessageType } = require('@adiwajshing/baileys')
 const { sticker } = require('../lib/sticker')
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `contoh:\n${usedPrefix + command} ariffb|dinda annisa`
+    if (!text) return m.reply(`contoh:\n${usedPrefix + command} kamu|pacarmu`)
     let [nama1, nama2] = text.split(/[&|.]/i)
-    if (!nama1 || !nama2) throw `contoh:\n${usedPrefix + command} ariffb|dinda annisa`
+    if (!nama1 || !nama2) return m.reply(`contoh:\n${usedPrefix + command} kamu|pacarmu`)
 
     let res = await fetch(global.API('zeks', '/api/primbonjodoh', { nama1, nama2 }, 'apikey'))
-    if (res.status != 200) throw await `${res.status} ${res.statusText}`
+    if (res.status != 200) return m.reply(await `${res.status} ${res.statusText}`)
     let json = await res.json()
     if (json.status) {
         let { nama1, nama2, thumb, positif, negatif } = json.result
@@ -22,8 +22,6 @@ ${positif}
 
 *Negatif:*
 ${negatif}
-
-*© stikerin*
 `.trim())
     }
     else throw json
@@ -36,3 +34,5 @@ handler.command = /^(jodoh)$/i
 handler.limit = true
 
 module.exports = handler
+
+// Thanks to ariffb25 for this command :)

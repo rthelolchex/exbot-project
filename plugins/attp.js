@@ -1,4 +1,5 @@
 let handler = async (m, { conn, text }) => {
+  if (!text) return m.reply("Teksnya mana?")
   let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : m.text
   conn.sendFile(m.chat, global.API('xteam', '/attp', { file: '', text: teks }), 'attp.webp', '', m, false, { asSticker: true })
 }

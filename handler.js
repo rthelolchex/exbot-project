@@ -313,8 +313,10 @@ module.exports = {
       }
 
       try {
-        if (opts['nomsg']) return
-        require('./lib/print')(m, this)
+        let print = require('./lib/print')
+        if (opts['nomsg']) {
+          return
+        } else print(m, this)
       } catch (e) {
         console.log(m, m.quoted, e)
       }
