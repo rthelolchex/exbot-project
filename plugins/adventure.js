@@ -47,7 +47,6 @@ HP mu berkurang -${healt * 1} karena kamu telah berpetualang sampai ${pickRandom
             global.db.data.users[m.sender].exp += exp * 1
             global.db.data.users[m.sender].money += uang * 1
             global.db.data.users[m.sender].potion += potion * 1
-            global.db.data.users[m.sender].primogems += primogems * 1
             global.db.data.users[m.sender].common += common * 1 
             global.db.data.users[m.sender].exquisite += exquisite * 1
             global.db.data.users[m.sender].sampah += sampah * 1
@@ -63,6 +62,7 @@ handler.help = ['adventure', 'petualang', 'berpetualang', 'mulung', 'work']
 handler.tags = ['game']
 handler.command = /^(adventure|(ber)?petualang(ang)?|mulung|work)$/i
 
+handler.maintenance = true
 handler.fail = null
 
 module.exports = handler

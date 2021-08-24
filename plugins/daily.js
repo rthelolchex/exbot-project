@@ -11,7 +11,7 @@ let handler = async (m, { isPrems }) => {
   global.db.data.users[m.sender].money += isPrems ? premmoney : freemoney
   global.db.data.users[m.sender].potion += isPrems ? prempotion : freepotion
   global.db.data.users[m.sender].primogems += 60
-  m.reply(`+${isPrems ? prem : free} XP\n+${isPrems ? premmoney : freemoney} Money\n${isPrems ? prempotion : freepotion} Potion\n60 Primogems`)
+  m.reply(`+${isPrems ? prem : free} XP\n+${isPrems ? premmoney : freemoney} Money\n+${isPrems ? prempotion : freepotion} Potion\n+60 Primogems`)
   global.db.data.users[m.sender].lastclaim = new Date * 1
 }
 handler.help = ['daily', 'claim']

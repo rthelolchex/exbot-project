@@ -48,6 +48,7 @@ module.exports = {
           if (!isNumber(user.exquisite)) user.exquisite = 0
           if (!isNumber(user.sampah)) user.sampah = 0
           if (!isNumber(user.lastadventure)) user.lastadventure = 0
+          if (!isNumber(user.healt)) user.healt = 100
         } else global.db.data.users[m.sender] = {
           exp: 0,
           limit: 10,
@@ -68,7 +69,8 @@ module.exports = {
           common: 0,
           exquisite: 0,
           sampah: 0,
-          lastadventure: 0
+          lastadventure: 0,
+          healt: 100,
         }
 
         let chat = global.db.data.chats[m.chat]
