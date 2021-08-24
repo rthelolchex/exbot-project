@@ -2,73 +2,61 @@
 // Alias BochilGaming
 
 let { MessageType } = require('@adiwajshing/baileys')
-let handler = async (m, { conn, usedPrefix, DevMode }) => { 
+let handler = async (m, { conn, usedPrefix }) => { 
     try { 
-        let __timers = (new Date - global.DATABASE._data.users[m.sender].lastadventure)
+        let __timers = (new Date - global.db.data.users[m.sender].lastadventure)
         let _timers = (300000 - __timers) 
         let timers = clockString(_timers)
-        if (global.DATABASE._data.users[m.sender].healt > 79) {
-            if (new Date - global.DATABASE._data.users[m.sender].lastadventure > 300000) {
-            let armor = global.DATABASE._data.users[m.sender].armor
-            let rubah = global.DATABASE._data.users[m.sender].rubah
-            let kuda = global.DATABASE._data.users[m.sender].kuda
-            let kucing = global.DATABASE._data.users[m.sender].kucing
+        if (global.db.data.users[m.sender].healt > 79) {
+            if (new Date - global.db.data.users[m.sender].lastadventure > 300000) {
+            let armor = global.db.data.users[m.sender].armor
             let ____health = `${Math.floor(Math.random() * 101)}`.trim()
             let ___health = (____health * 1)
-            let kucingnya = (kucing == 0? 0 : '' || kucing == 1 ? 5 : '' || kucing == 2 ? 10 : '' || kucing == 3 ? 15 : '' || kucing == 4 ? 21 : ''  || kucing == 5 ? 30 : '')
             let armornya = (armor == 0 ? 0 : '' || armor == 1 ? 5 : '' || armor == 2 ? 10 : '' || armor == 3 ? 15 : '' || armor == 4 ? 21 : '' || armor == 5 ? 30 : '')
-            let __health = (___health > 60 ? ___health - kucingnya - armornya : ___health)
-            let healt = (kucing == 0 && armor == 0 ? pickRandom(['100', '99', '98', '97', '96', '95', '94', '93', '92', '91', '90']) : kucing > 0 && armor > 0 ? __health : ___health)
-            let exp = (Math.floor(Math.random() * 400) + (kuda * 70))
+            let __health = (___health > 60 ? ___health - armornya : ___health)
+            let healt = (armor == 0 ? pickRandom(['100', '99', '98', '97', '96', '95', '94', '93', '92', '91', '90']) : armor > 0 ? __health : ___health)
+            let exp = (Math.floor(Math.random() * 400))
             let uang = `${Math.floor(Math.random() * 400)}`.trim() 
             let _potion = `${Math.floor(Math.random() * 2)}`.trim()
             let potion = (_potion * 1)
-            let _diamond = (rubah == 0 ? pickRandom(['0', '1', '0', '1', '0', '1', '0']) : '' || rubah == 1 ? pickRandom(['0', '1', '0', '1']) : '' || rubah == 2 ? pickRandom(['0', '1', '0', '1', '2']) : '' || rubah == 3 ? pickRandom(['0', '1', '0', '2', '2', '0']) : '' || rubah == 4 ? pickRandom(['0', '1', '1', '2', '1', '1', '0']) : '' || rubah == 5 ? pickRandom(['0', '0', '1', '2', '2', '1', '1', '0']) : '' )
-            let diamond = (_diamond * 1)
             let _common = `${Math.floor(Math.random() * 3)}`.trim()
             let common = (_common * 1)
-            let _uncommon = `${Math.floor(Math.random() * 2)}`.trim()
-            let uncommon = (_uncommon * 1) 
+            let _exquisite = `${Math.floor(Math.random() * 2)}`.trim()
+            let exquisite = (_exquisite * 1) 
             let _precious = `${pickRandom(['1', '0', '0', '1'])}`
             let precious = (_precious * 1)
             let _luxurious = `${pickRandom(['1', '0', '0', '0'])}`
             let sampah = `${Math.floor(Math.random() * 300)}`.trim()
             let luxurious = (_luxurious * 1)
             let str = `
-Nyawa mu berkurang -${healt * 1} karena Kamu telah berpetualang sampai ${pickRandom(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', `Khaenri'ah`, 'Chasm', 'Celestia', '...'])} dan mendapatkan
-*exp:* ${exp} 
-*uang:* ${uang}
-*sampah:* ${sampah}${potion == 0 ? '' : '\n*Potion:* ' + potion + ''}${diamond == 0 ? '' : '\n*diamond:* ' + diamond + ''}${common == 0 ? '' : '\n*common crate:* ' + common + ''}${uncommon == 0 ? '' : '\n*uncommon crate:* ' + uncommon + ''}
+HP mu berkurang -${healt * 1} karena kamu telah berpetualang sampai ${pickRandom(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', `Khaenri'ah`, 'Chasm', 'Celestia', '...'])} dan mendapatkan
+*Exp:* ${exp} 
+*Uang:* ${uang}
+*Sampah:* ${sampah}${potion == 0 ? '' : '\n*Potion:* ' + potion + ''}${common == 0 ? '' : '\n*Common chest:* ' + common + ''}${exquisite == 0 ? '' : '\n*Exquisite chest:* ' + exquisite + ''}
 `.trim()
             conn.reply(m.chat, str, m)
             if (precious > 0) {
-                   global.DATABASE._data.users[m.sender].precious += precious * 1
-                   conn.reply(m.chat, '*Selamat anda mendapatkan item Rare yaitu*\n' + precious + ' Precious Chest', m)
+                   global.db.data.users[m.sender].precious += precious * 1
+                   conn.reply(m.chat, '*Selamat anda mendapatkan item langka yaitu*\n' + precious + ' Precious Chest', m)
             }
             if (luxurious > 0) {
-                global.DATABASE._data.users[m.sender].luxurious += luxurious * 1
-                conn.reply(m.chat, '*Selamat anda mendapatkan item Epic yaitu*\n' + luxurious + ' Luxurious Chest', m)
+                global.db.data.users[m.sender].luxurious += luxurious * 1
+                conn.reply(m.chat, '*Selamat anda mendapatkan item langka yaitu*\n' + luxurious + ' Luxurious Chest', m)
             }
-            global.DATABASE._data.users[m.sender].healt -= healt * 1
-            global.DATABASE._data.users[m.sender].exp += exp * 1
-            global.DATABASE._data.users[m.sender].money += uang * 1
-            global.DATABASE._data.users[m.sender].potion += potion * 1
-            global.DATABASE._data.users[m.sender].diamond += diamond * 1
-            global.DATABASE._data.users[m.sender].common += common * 1 
-            global.DATABASE._data.users[m.sender].uncommon += uncommon * 1
-            global.DATABASE._data.users[m.sender].sampah += sampah * 1
-            global.DATABASE._data.users[m.sender].lastadventure = new Date * 1
+            global.db.data.users[m.sender].healt -= healt * 1
+            global.db.data.users[m.sender].exp += exp * 1
+            global.db.data.users[m.sender].money += uang * 1
+            global.db.data.users[m.sender].potion += potion * 1
+            global.db.data.users[m.sender].primogems += primogems * 1
+            global.db.data.users[m.sender].common += common * 1 
+            global.db.data.users[m.sender].exquisite += exquisite * 1
+            global.db.data.users[m.sender].sampah += sampah * 1
+            global.db.data.users[m.sender].lastadventure = new Date * 1
             } else conn.reply(m.chat, `Anda sudah berpetualang dan kelelahan, silahkan coba *${timers}* lagi`, m)
-        } else conn.reply(m.chat, 'Minimal 80 health untuk bisa berpetualang, beli nyawa dulu dengan ketik *' + usedPrefix + 'shop buy potion <jumlah>*\ndan ketik *' + usedPrefix + 'use potion <jumlah>*\n\n_Untuk mendapat money dan potion gratis ketik_ *' + usedPrefix + 'claim*', m)
+        } else conn.reply(m.chat, 'Minimal 80 HP untuk bisa berpetualang, beli nyawa dulu dengan ketik *' + usedPrefix + 'shop buy potion <jumlah>*\ndan ketik *' + usedPrefix + 'use potion <jumlah>*\n\n_Untuk mendapat money dan potion gratis ketik_ *' + usedPrefix + 'claim*', m)
     } catch (e) {
         console.log(e)
         conn.reply(m.chat, 'Error', m)
-        if (DevMode) {
-            let file = require.resolve(__filename)
-            for (let jid of global.owner.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').filter(v => v != conn.user.jid)) {
-                conn.sendMessage(jid, file + ' error\nNo: *' + m.sender.split`@`[0] + '*\nCommand: *' + m.text + '*\n\n*' + e + '*', MessageType.text)
-            }
-        }
     }
 }
 handler.help = ['adventure', 'petualang', 'berpetualang', 'mulung', 'work']

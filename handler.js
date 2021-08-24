@@ -43,6 +43,11 @@ module.exports = {
           if (!('autolevelup' in user)) user.autolevelup = false
           if (!isNumber(user.money)) user.money = 1000
           if (!isNumber(user.potion)) user.potion = 3
+          if (!isNumber(user.primogems)) user.primogems = 0
+          if (!isNumber(user.common)) user.common = 0
+          if (!isNumber(user.exquisite)) user.exquisite = 0
+          if (!isNumber(user.sampah)) user.sampah = 0
+          if (!isNumber(user.lastadventure)) user.lastadventure = 0
         } else global.db.data.users[m.sender] = {
           exp: 0,
           limit: 10,
@@ -59,6 +64,11 @@ module.exports = {
           autolevelup: false,
           money: 1000,
           potion: 3,
+          primogems: 0,
+          common: 0,
+          exquisite: 0,
+          sampah: 0,
+          lastadventure: 0
         }
 
         let chat = global.db.data.chats[m.chat]
