@@ -7,12 +7,12 @@ const CFonts  = require('cfonts')
 CFonts.say('ExBot\nProject', {
   font: 'block',
   align: 'center',
-  gradient: ['red', 'magenta']
+  colors: ['blueBright', 'cyanBright']
 })
 CFonts.say(`'${package.name}' By @${package.author.name || package.author}\nCopyright by @Nurutomo`, {
   font: 'console',
   align: 'center',
-  gradient: ['red', 'magenta']
+  colors: ['cyan', 'cyanBright']
 })
 
 var isRunning = false
