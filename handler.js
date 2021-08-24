@@ -235,6 +235,10 @@ module.exports = {
             fail('unreg', m, this)
             continue
           }
+          if (plugin.maintenance == true && !isOwner) { // Biar ga diintip orang wkwkwk
+            fail('maintenance', m, this)
+            continue
+          }
 
           m.isCommand = true
           let xp = 'exp' in plugin ? parseInt(plugin.exp) : 17 // XP Earning per command
@@ -419,7 +423,8 @@ global.dfail = (type, m, conn) => {
     private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
     admin: 'Perintah ini hanya untuk *Admin* grup!',
     botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
-    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Manusia.16*'
+    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Manusia.16*',
+    maintenance: 'Fitur ini sedang dalam pembangunan, so stay tuned for the updates!'
   }[type]
   if (msg) return m.reply(msg)
 }
