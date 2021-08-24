@@ -41,6 +41,8 @@ module.exports = {
           if (!isNumber(user.level)) user.level = 0
           if (!user.role) user.role = 'Beginner'
           if (!('autolevelup' in user)) user.autolevelup = false
+          if (!isNumber(user.money)) user.money = 1000
+          if (!isNumber(user.potion)) user.potion = 3
         } else global.db.data.users[m.sender] = {
           exp: 0,
           limit: 10,
@@ -55,6 +57,8 @@ module.exports = {
           level: 0,
           role: 'Beginner',
           autolevelup: false,
+          money: 1000,
+          potion: 3,
         }
 
         let chat = global.db.data.chats[m.chat]
