@@ -16,7 +16,7 @@ let handler = async (m, { conn, usedPrefix }) => {
             let __health = (___health > 60 ? ___health - armornya : ___health)
             let healt = (armor == 0 ? pickRandom(['100', '99', '98', '97', '96', '95', '94', '93', '92', '91', '90']) : armor > 0 ? __health : ___health)
             let exp = (Math.floor(Math.random() * 400))
-            let uang = `${Math.floor(Math.random() * 400)}`.trim() 
+            let mora = `${Math.floor(Math.random() * 400)}`.trim() 
             let _potion = `${Math.floor(Math.random() * 2)}`.trim()
             let potion = (_potion * 1)
             let _common = `${Math.floor(Math.random() * 3)}`.trim()
@@ -31,7 +31,7 @@ let handler = async (m, { conn, usedPrefix }) => {
             let str = `
 HP mu berkurang -${healt * 1} karena kamu telah berpetualang sampai ${pickRandom(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', `Khaenri'ah`, 'Chasm', 'Celestia', '...'])} dan mendapatkan
 *Exp:* ${exp} 
-*Uang:* ${uang}
+*mora:* ${mora}
 *Sampah:* ${sampah}${potion == 0 ? '' : '\n*Potion:* ' + potion + ''}${common == 0 ? '' : '\n*Common chest:* ' + common + ''}${exquisite == 0 ? '' : '\n*Exquisite chest:* ' + exquisite + ''}
 `.trim()
             conn.reply(m.chat, str, m)
@@ -45,7 +45,7 @@ HP mu berkurang -${healt * 1} karena kamu telah berpetualang sampai ${pickRandom
             }
             global.db.data.users[m.sender].healt -= healt * 1
             global.db.data.users[m.sender].exp += exp * 1
-            global.db.data.users[m.sender].money += uang * 1
+            global.db.data.users[m.sender].mora += mora * 1
             global.db.data.users[m.sender].potion += potion * 1
             global.db.data.users[m.sender].common += common * 1 
             global.db.data.users[m.sender].exquisite += exquisite * 1
