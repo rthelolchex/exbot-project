@@ -7,7 +7,7 @@ const CFonts  = require('cfonts')
 CFonts.say('ExBot\nProject', {
   font: 'block',
   align: 'center',
-  colors: ['blueBright', 'cyanBright']
+  colors: ['cyan', 'blueBright']
 })
 CFonts.say(`'${package.name}' By @${package.author.name || package.author}\nCopyright by @Nurutomo`, {
   font: 'console',

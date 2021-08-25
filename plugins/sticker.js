@@ -1,31 +1,43 @@
 const { MessageType } = require('@adiwajshing/baileys')
-const { sticker } = require('../lib/sticker')
+const WSF = require('wa-sticker-formatter')
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   let stiker = false
+  let wsf = false
   try {
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || ''
     if (/image/.test(mime)) {
       let img = await q.download()
       if (!img) throw `balas gambar dengan caption *${usedPrefix + command}*`
-      stiker = await sticker(img, false, global.packname, global.author)
+      wsf = new WSF.Sticker(img, {
+        pack: global.packname,
+        author: global.author,
+        crop: false
+      })
     } else if (/video/.test(mime)) {
       if ((q.msg || q).seconds > 11) return m.reply('Maksimal 10 detik!')
       let img = await q.download()
       if (!img) throw `balas video/gif dengan caption *${usedPrefix + command}*`
-      stiker = await sticker(img, false, global.packname, global.author)
+      wsf = new WSF.Sticker(img, {
+        pack: global.packname,
+        author: global.author,
+        crop: false
+      })
     } else if (/webp/.test(mime)) {
       let img = await q.download()
       if (!img) throw `balas sticker dengan caption *${usedPrefix + command}*`
-      stiker = await sticker(img, false, global.packname, global.author)
-    } else if (args[0]) {
-      if (isUrl(args[0])) stiker = await sticker(false, args[0], global.packname, global.author)
-      else return m.reply('URL tidak valid!')
+      wsf = new WSF.Sticker(img, {
+        pack: global.packname,
+        author: global.author,
+        crop: false
+      })
     }
   } finally {
-    if (stiker) conn.sendMessage(m.chat, stiker, MessageType.sticker, {
-      quoted: m
-    })
+    if (wsf) {
+      await wsf.build()
+      const stiker = await wsf.get()
+      if (stiker) await conn.sendMessage(m.chat, stiker, MessageType.sticker, { quoted: m, mimetype: 'image/webp'})
+    }
     else throw 'Conversion failed'
   }
 }
