@@ -278,9 +278,8 @@ module.exports = {
           } catch (e) {
             // Jika terjadi error
             m.error = e
-            console.error(e)
             if (e) {
-              let text = util.format(e.message)
+              let text = util.format(e)
               for (let key of Object.values(global.APIKeys))
                 text = text.replace(new RegExp(key, 'g'), '#HIDDEN#')
               m.reply(text)
@@ -333,10 +332,8 @@ module.exports = {
       }
 
       try {
-        let print = require('./lib/print')
-        if (opts['nomsg']) {
-          return
-        } else print(m, this)
+        if (opts['nomsg']) return
+        require('./lib/print')(m, this)
       } catch (e) {
         console.log(m, m.quoted, e)
       }

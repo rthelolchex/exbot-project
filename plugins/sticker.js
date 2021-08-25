@@ -1,43 +1,21 @@
 const { MessageType } = require('@adiwajshing/baileys')
-const WSF = require('wa-sticker-formatter')
-let handler = async (m, { conn, args, usedPrefix, command }) => {
+const { sticker } = require('../lib/sticker')
+let handler  = async (m, { conn, args }) => {
   let stiker = false
-  let wsf = false
   try {
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || ''
-    if (/image/.test(mime)) {
+    m.reply("Downloading and converting to sticker media ...")
+    if (/image|video/.test(mime)) {
       let img = await q.download()
-      if (!img) throw `balas gambar dengan caption *${usedPrefix + command}*`
-      wsf = new WSF.Sticker(img, {
-        pack: global.packname,
-        author: global.author,
-        crop: false
-      })
-    } else if (/video/.test(mime)) {
-      if ((q.msg || q).seconds > 11) return m.reply('Maksimal 10 detik!')
-      let img = await q.download()
-      if (!img) throw `balas video/gif dengan caption *${usedPrefix + command}*`
-      wsf = new WSF.Sticker(img, {
-        pack: global.packname,
-        author: global.author,
-        crop: false
-      })
-    } else if (/webp/.test(mime)) {
-      let img = await q.download()
-      if (!img) throw `balas sticker dengan caption *${usedPrefix + command}*`
-      wsf = new WSF.Sticker(img, {
-        pack: global.packname,
-        author: global.author,
-        crop: false
-      })
-    }
+      if (!img) throw 'Foto/Video tidak ditemukan'
+      stiker = await sticker(img, false, global.packname, global.author)
+    } else if (args[0]) stiker = await sticker(false, args[0], global.packname, global.author)
   } finally {
-    if (wsf) {
-      await wsf.build()
-      const stiker = await wsf.get()
-      if (stiker) await conn.sendMessage(m.chat, stiker, MessageType.sticker, { quoted: m, mimetype: 'image/webp'})
-    }
+    if (stiker) m.reply("Conversion is done! Now sending the file...")
+    if (stiker) conn.sendMessage(m.chat, stiker, MessageType.sticker, {
+      quoted: m
+    })
     else throw 'Conversion failed'
   }
 }
@@ -46,7 +24,3 @@ handler.tags = ['sticker']
 handler.command = /^s(tic?ker)?(gif)?(wm)?$/i
 
 module.exports = handler
-
-const isUrl = (text) => {
-  return text.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)(jpe?g|gif|png)/, 'gi'))
-}
