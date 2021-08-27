@@ -14,7 +14,7 @@ let handler = async(m, { conn, text }) => {
         return err
     })
     .on('end', async function() {
-        console.log('Sticker is done!')
+        m.reply('Sticker is done!')
         stiker = await addExif(fs.readFileSync('./tmp/img.webp'), global.packname, global.author)
         conn.sendMessage(m.chat, stiker, MessageType.sticker)
         fs.unlinkSync('./tmp/img.webp')
