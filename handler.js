@@ -98,6 +98,14 @@ module.exports = {
           delete: true,
           antiLink: false,
         }
+
+        let settings = global.db.data.settings
+        if (typeof settings !== 'object') global.db.data.settings = {}
+        if (settings) {
+          if (!isNumber(settings.status)) settings.status = 0
+        } else global.db.data.settings = {
+          status: 0,
+        }
       } catch (e) {
         console.error(e)
       }

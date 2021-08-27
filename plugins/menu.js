@@ -1,38 +1,11 @@
 let fs = require('fs')
 let path = require('path')
 let levelling = require('../lib/levelling')
-let tags = {
-  'main': 'Main',
-  'game': 'Game',
-  'xp': 'Exp & Limit',
-  'sticker': 'Sticker',
-  'kerang': 'Kerang Ajaib',
-  'quotes': 'Quotes',
-  'admin': 'Admin',
-  'group': 'Group',
-  'premium': 'Premium',
-  'internet': 'Internet',
-  'anonymous': 'Anonymous Chat',
-  'nulis': 'MagerNulis & Logo',
-  'downloader': 'Downloader',
-  'tools': 'Tools',
-  'fun': 'Fun',
-  'database': 'Database',
-  'vote': 'Voting',
-  'absen': 'Absen',
-  'quran': 'Al Qur\'an',
-  'jadibot': 'Jadi Bot',
-  'owner': 'Owner',
-  'host': 'Host',
-  'advanced': 'Advanced',
-  'info': 'Info',
-  '': 'No Category',
-}
 const defaultMenu = {
   before: `
-╭───《 %me 》───
+╭───《 %me 〕───
 ├────────────────────
-╞═══ 《 *USER INFO* 》 ═══
+╞═══〔 *USER INFO* 〕═══
 ├────────────────────
 │ Name : %name
 │ Limit tersisa : *%limit*
@@ -42,18 +15,18 @@ const defaultMenu = {
 │ [%xp4levelup lagi untuk levelup]
 │ Total XP : %totalexp XP
 ├────────────────────
-╞═══ 《 *BOT STATS* 》 ═══
+╞═══〔 *BOT STATS* 〕═══
 ├────────────────────
 │ Tanggal: *%week %weton, %date*
 │ Tanggal Islam: *%dateIslamic*
 │ Waktu: *%time*
 │ Uptime: *%uptime (%muptime)*
 │ Database: %rtotalreg of %totalreg
-╰─── 《 *Powered by %npmname* 》 ───
+╰───〔 *Powered by %npmname* 〕───
 %readmore`.trimStart(),
   header: `
 ╭────────────────────
-╞═══ 《 *%category Menu* 》 ═══
+╞═══〔 *%category Menu* 〕═══
 ├────────────────────`.trimStart(),
   body: '│ • %cmd %islimit %isPremium',
   footer: '╰────────────────────\n',
@@ -63,7 +36,239 @@ const defaultMenu = {
 ${'```%npmdesc```'}
 `,
 }
-let handler = async (m, { conn, usedPrefix: _p }) => {
+let handler = async (m, { conn, usedPrefix: _p, args }) => {
+  let tags
+  let teks = `${args[0]}`.toLowerCase()
+  if (teks === 'all') tags = {
+    'main': 'Main',
+    'game': 'Game',
+    'xp': 'Exp & Limit',
+    'sticker': 'Sticker',
+    'kerang': 'Kerang Ajaib',
+    'quotes': 'Quotes',
+    'admin': `Admin ${global.opts['restrict'] ? '' : '(Dinonaktifkan)'}`,
+    'group': 'Group',
+    'premium': 'Premium',
+    'internet': 'Internet',
+    'anonymous': 'Anonymous Chat',
+    'nulis': 'MagerNulis & Logo',
+    'downloader': 'Downloader',
+    'tools': 'Tools',
+    'fun': 'Fun',
+    'database': 'Database',
+    'vote': 'Voting',
+    'absen': 'Absen',
+    'quran': 'Al Qur\'an',
+    'jadibot': 'Jadi Bot',
+    'owner': 'Owner',
+    'host': 'Host',
+    'advanced': 'Advanced',
+    'info': 'Info',
+    'voicechanger': 'Pengubah suara',
+    'maker': 'Maker',
+    '': 'No Category',
+  }
+  if (teks === 'main') tags = {
+    'main': 'Main',
+  }
+  if (teks === 'game') tags = {
+    'game': 'Game',
+  }
+  if (teks === 'xp') tags = {
+    'xp': 'Exp & Limit',
+  }
+  if (teks === 'sticker') tags = {
+    'sticker': 'Sticker',
+  }
+  if (teks === 'kerang') tags = {
+    'kerang': 'Kerang Ajaib',
+  }
+  if (teks === 'quotes') tags = {
+    'quotes': 'Quotes',
+  }
+  if (teks === 'admin') tags = {
+    'admin': `Admin ${global.opts['restrict'] ? '' : '(Dinonaktifkan)'}`,
+  }
+  if (teks === 'group') tags = {
+    'Group': 'Group',
+  }
+  if (teks === 'owner') tags = {
+    'Owner': 'Owner',
+  }
+  if (teks === 'premium') tags = {
+    'Premium': 'Premium',
+  }
+  if (teks === 'internet') tags = {
+    'internet': 'Internet',
+  }
+  if (teks === 'anonymous') tags = {
+    'anonymous': 'Anonymous Chat',
+  }
+  if (teks === 'nulis') tags = {
+    'nulis': 'Magernulis & Logo',
+  }
+  if (teks === 'downloader') tags = {
+    'downloader': 'Downloader',
+  }
+  if (teks === 'tools') tags = {
+    'tools': 'Tools',
+  }
+  if (teks === 'fun') tags = {
+    'fun': 'Fun',
+  }
+  if (teks === 'vote') tags = {
+    'Vote': 'vote',
+  }
+  if (teks === 'database') tags = {
+    'database': 'Database',
+  }
+  if (teks === 'absen') tags = {
+    'absen': 'Absen',
+  }
+  if (teks === 'quran') tags = {
+    'quran': 'Al Qur\'an',
+  }
+  if (teks === 'jadibot') tags = {
+    'jadibot': 'Jadi bot',
+  }
+  if (teks === 'host') tags = {
+    'host': 'Host',
+  }
+  if (teks === 'info') tags = {
+    'info': 'Info',
+  }
+  if (teks === 'voicechanger') tags = {
+    'voicechanger': 'Pengubah suara',
+  }
+  if (teks === 'maker') tags = {
+    'maker': "Maker",
+  }
+  if (!args[0]) {
+    conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
+      "listMessage": {
+        "title": "Please click at down below.",
+        "description": "Made with hand by rthelolchex",
+        "buttonText": "Klik disini",
+        "listType": "SINGLE_SELECT",
+        "sections": [
+          {
+            "rows": [
+              {
+                "title": "Semua menu",
+                "description": "",
+                "rowId": `.menu all`
+              }, {
+                "title": "Game Menu",
+                "description": "",
+                "rowId": `.menu game`
+              }, {
+                "title": "Exp & Limit Menu",
+                "description": "",
+                "rowId": `.menu xp`
+              }, {
+                "title": "Sticker Menu",
+                "description": "",
+                "rowId": `.menu sticker`
+              }, {
+                "title": "Kerang Ajaib Menu",
+                "description": "",
+                "rowId": `.menu kerang`
+              }, {
+                "title": "Quotes Menu",
+                "description": "",
+                "rowId": `.menu quotes`
+              }, {
+                "title": "Admin Menu",
+                "description": "",
+                "rowId": `.menu admin`
+              }, {
+                "title": "Group Menu",
+                "description": "",
+                "rowId": `.menu Group`
+              }, {
+                "title": "Premium Menu",
+                "description": "",
+                "rowId": `.menu premium`
+              }, {
+                "title": "Internet Menu",
+                "description": "",
+                "rowId": `.menu internet`
+              }, {
+                "title": "Anonymous Chat Menu",
+                "description": "",
+                "rowId": `.menu anonymous`
+              }, {
+                "title": "Magernulis & Logo Menu",
+                "description": "",
+                "rowId": `.menu nulis`
+              }, {
+                "title": "Downloader Menu",
+                "description": "",
+                "rowId": `.menu downloader`
+              }, {
+                "title": "Tools Menu",
+                "description": "",
+                "rowId": `.menu tools`
+              }, {
+                "title": "Fun Menu",
+                "description": "",
+                "rowId": `.menu fun`
+              }, {
+                "title": "Database Menu",
+                "description": "",
+                "rowId": `.menu xp`
+              }, {
+                "title": "Voting Menu",
+                "description": "",
+                "rowId": `.menu vote`
+              }, {
+                "title": "Absen Menu",
+                "description": "",
+                "rowId": `.menu absen`
+              }, {
+                "title": "Al Qur\'an Menu",
+                "description": "",
+                "rowId": `.menu quran`
+              }, {
+                "title": "Jadi Bot Menu",
+                "description": "",
+                "rowId": `.menu jadibot`
+              }, {
+                "title": "Owner Menu",
+                "description": "",
+                "rowId": `.menu owner`
+              }, {
+                "title": "Host Menu",
+                "description": "",
+                "rowId": `.menu host`
+              }, {
+                "title": "Advanced Menu",
+                "description": "",
+                "rowId": `.menu advanced`
+              }, {
+                "title": "Info Menu",
+                "description": "",
+                "rowId": `.menu info`
+              }, {
+                "title": "Pengubah Suara Menu",
+                "description": "",
+                "rowId": `.menu voicechanger`
+              }, {
+                "title": "Maker Menu",
+                "description": "",
+                "rowId": `.menu maker`
+              },
+            ]
+          }
+        ], "contextInfo": {
+          "stanzaId": m.key.id,
+          "participant": m.sender,
+          "quotedMessage": m.message
+        }
+      }
+    }, {}), { waitForAck: true })
+    throw 0
+  }
   try {
     let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
     let { exp, limit, level, role, money } = global.db.data.users[m.sender]
@@ -115,10 +320,15 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
         enabled: !plugin.disabled,
       }
     })
-    for (let plugin of help)
-      if (plugin && 'tags' in plugin)
-        for (let tag of plugin.tags)
-          if (!(tag in tags) && tag) tags[tag] = tag
+    let groups = {}
+    for (let tag in tags) {
+      groups[tag] = []
+      for (let plugin of help)
+        if (plugin.tags && plugin.tags.includes(tag))
+          if (plugin.help) groups[tag].push(plugin)
+      // for (let tag of plugin.tags)
+      //   if (!(tag in tags)) tags[tag] = tag
+    }
     conn.menu = conn.menu ? conn.menu : {}
     let before = conn.menu.before || defaultMenu.before
     let header = conn.menu.header || defaultMenu.header

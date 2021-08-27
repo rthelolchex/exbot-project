@@ -8,10 +8,10 @@ let handler = async (m, { isPrems }) => {
   let time = global.db.data.users[m.sender].lastclaim + 86400000
   if (new Date - global.db.data.users[m.sender].lastclaim < 86400000) return m.reply(`Anda sudah mengklaim klaim harian hari ini\ntunggu selama ${msToTime(time - new Date())} lagi`)
   global.db.data.users[m.sender].exp += isPrems ? prem : free
-  global.db.data.users[m.sender].money += isPrems ? premmoney : freemoney
+  global.db.data.users[m.sender].mora += isPrems ? premmoney : freemoney
   global.db.data.users[m.sender].potion += isPrems ? prempotion : freepotion
   global.db.data.users[m.sender].primogems += 60
-  m.reply(`+${isPrems ? prem : free} XP\n+${isPrems ? premmoney : freemoney} Money\n+${isPrems ? prempotion : freepotion} Potion\n+60 Primogems`)
+  m.reply(`+${isPrems ? prem : free} XP\n+${isPrems ? premmoney : freemoney} Mora\n+${isPrems ? prempotion : freepotion} Potion\n+60 Primogems`)
   global.db.data.users[m.sender].lastclaim = new Date * 1
 }
 handler.help = ['daily', 'claim']
