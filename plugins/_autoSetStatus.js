@@ -8,6 +8,7 @@ handler.all = async function (m) {
     let setting = global.db.data.settings
 
     if (new Date() * 1 - setting.status > 1000) {
+        if (opts['nobio']) return
         let _uptime = process.uptime() * 1000
         let uptime = clockString(_uptime)
         await this.setStatus(`Aktif selama ${uptime} | Mode : ${global.opts['self'] ? 'Private' : 'Public'} | ExBot - Project by rthelolchex`).catch(_ => _)
