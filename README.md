@@ -60,6 +60,13 @@ npm update
 * Download And Install Git [`Click Here`](https://git-scm.com/downloads)
 * Download And Install NodeJS [`Click Here`](https://nodejs.org/en/download)
 * Download And Install FFmpeg [`Click Here`](https://ffmpeg.org/download.html) (**Don't Forget Add FFmpeg to PATH enviroment variables**)
+* Caranya : 
+* `Search di windows "sysdm.cpl"`
+* `Klik advanced lalu environment variables`
+* `Klik Path dibagian user variables atau system variables terserah`
+* `Lalu klik edit, terus new`
+* `Arahkan ke file ffmpegnya, contoh : `
+* `C:\ffmpeg\bin`, pastikan di folder bin yaa
 * Download And Install ImageMagick [`Click Here`](https://imagemagick.org/script/download.php)
 
 ```bash
