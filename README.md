@@ -83,38 +83,39 @@ node .
 
 ### `--self`
 
-Activate self mode (Ignores other)
+Aktifkan mode self (hanya bisa reply dinomor sendiri yang anda tautkan ke WhatsApp Web)
 
 ### `--pconly`
 
-If that chat not from private bot, bot will ignore
+Jika chat bukan dari chat pribadi bot, bot akan mengabaikan
 
 ### `--gconly`
 
-If that chat not from group, bot will ignore
+Jika chat bukan dari grup, bot akan mengabaikan
 
 ### `--swonly`
 
-If that chat not from status, bot will ignore
+Jika chat bukan dari status, bot akan mengabaikan
 
 ### `--prefix <prefixes>`
 
-* `prefixes` are seperated by each character
-Set prefix
+* `prefixes` dipisahkan oleh karakter masing-masing (maksimal 1 kata)
+Atur prefix
 
 ### `--server`
 
-Used for [heroku](https://heroku.com/) or scan through website
+Digunakan untuk [heroku](https://heroku.com/) atau scan qr melalui website, contoh : 
+* `https://exbot-project.herokuapp.com/qr`, Ngapain masuk pak, w ga bikin itu hanya contoh wkwkwk
 
 ### `--db <json-server-url>`
 
-Use external db instead of local db, 
-Example Server `https://json-server.nurutomo.repl.co/`
-Code: `https://repl.it/@Nurutomo/json-server`
+Gunakan db external alih-alih db lokal, 
+contoh server `https://json-server.nurutomo.repl.co/`
+kode: `https://repl.it/@Nurutomo/json-server`
 
 `node . --db 'https://json-server.nurutomo.repl.co/'`
 
-The server should have like this specification
+Server harus memiliki spesifikasi seperti di bawah
 
 #### GET
 
@@ -136,39 +137,37 @@ Content-Type: application/json
 
 ### `--big-qr`
 
-If small qr unicode doesn't support
+Jika qr kecil / unicode tidak mendukung
 
 ### `--restrict`
 
-Enables restricted plugins (which can lead your number to be **banned** if used too often)
+Aktifkan plugin terbatas (yang dapat menyebabkan nomor WhatsApp anda terblokir jika digunakan terlalu sering)
 
 * Group Administration `add, kick`
 
 ### `--img`
 
-Enable image inspector through terminal
+Aktifkan mode gambar di terminal / konsol
 
 ### `--autoread`
 
-If enabled, all incoming messages will be marked as read
+Semua pesan masuk akan dibaca secara otomatis
 
 ### `--nyimak`
 
-No bot, just print received messages and add users to database
+Gaada bot, cuman nyimak doang dan baca pesan ataupun simpan database
 
 ### `--nomsg`
 
-No message printed, except error occured
+Tidak ada pesan masuk ke terminal, kecuali terjadinya error, tapi kalau dipake seperti biasa normal
 
 ### `--owneronly`
 
-Same like --self, but if you have 2 number you can use this
-Or using it like maintenance mode.
+Sama aja kayak mode self, tapi kalo anda pake 2 nomor ya pake ini wkwk, atau maintenance mode?
 
 ### `--nobio`
 
-If u want no update on your bio, or you want use private,
-Use this.
+Kalo gamau bionya keubah sendiri atau mau dipake pribadi, pake ni
 
 ### `--test`
 
