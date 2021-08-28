@@ -165,6 +165,11 @@ No message printed, except error occured
 Same like --self, but if you have 2 number you can use this
 Or using it like maintenance mode.
 
+### `--nobio`
+
+If u want no update on your bio, or you want use private,
+Use this.
+
 ### `--test`
 
 **Development** Testing Mode
