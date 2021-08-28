@@ -157,6 +157,83 @@ ${eeeprimogems > 0 ? `Primogems : ${eeeprimogems}` : ''}
                     break
                 }
                 break
+            case 'precious':
+                switch (total) {
+                    case 'chest':
+                    case '1':
+                        let _pmora = `${Math.floor(Math.random() * 150)}`.trim()
+                        let _pxp = `${Math.floor(Math.random() * 1500)}`.trim()
+                        let _ppotion = `${Math.floor(Math.random() * 15)}`.trim()
+                        let pprimogems = 10
+                        let pm = (_pmora * 1)
+                        let pxp = (_pxp * 1)
+                        let ppotion = (_ppotion * 1)
+                        let pstr = `
+Anda telah membuka precious chest dan mendapatkan : 
+${pm > 0 ? `Mora : ${pm}` : ''}
+${pxp > 0 ? `EXP : ${pxp}` : ''}
+${ppotion > 0 ? `Potion : ${ppotion}` : ''}
+${pprimogems > 0 ? `Primogems : ${pprimogems}` : ''}
+                        `.trim()
+                        if (user.precious >= 1) {
+                            user.precious -= 1
+                            user.potion += ppotion * 1
+                            user.exp += pxp * 1
+                            user.mora += pm * 1
+                            user.primogems += pprimogems * 1
+                            m.reply(pstr)
+                        } else m.reply("Precious chest anda tidak cukup!")
+                        break
+                    case '10':
+                        let _ppmora = `${Math.floor(Math.random() * 1500)}`.trim()
+                        let _ppxp = `${Math.floor(Math.random() * 15000)}`.trim()
+                        let _pppotion = `${Math.floor(Math.random() * 150)}`.trim()
+                        let ppprimogems = 100
+                        let ppm = (_ppmora * 1)
+                        let ppxp = (_ppxp * 1)
+                        let pppotion = (_pppotion * 1)
+                        let ppstr = `
+Anda telah membuka precious chest dan mendapatkan : 
+${ppm > 0 ? `Mora : ${ppm}` : ''}
+${ppxp > 0 ? `EXP : ${ppxp}` : ''}
+${pppotion > 0 ? `Potion : ${pppotion}` : ''}
+${ppprimogems > 0 ? `Primogems : ${ppprimogems}` : ''}
+                        `.trim()
+                        if (user.precious >= 10) {
+                            user.precious -= 10
+                            user.potion += pppotion * 1
+                            user.exp += ppxp * 1
+                            user.mora += ppm * 1
+                            user.primogems += ppprimogems * 1
+                            m.reply(ppstr)
+                        } else m.reply("Precious chest anda tidak cukup!")
+                        break
+                    case '100':
+                        let _pppmora = `${Math.floor(Math.random() * 15000)}`.trim()
+                        let _pppxp = `${Math.floor(Math.random() * 150000)}`.trim()
+                        let _ppppotion = `${Math.floor(Math.random() * 1500)}`.trim()
+                        let pppprimogems = 1000
+                        let pppm = (_pppmora * 1)
+                        let pppxp = (_pppxp * 1)
+                        let ppppotion = (_ppppotion * 1)
+                        let pppstr = `
+Anda telah membuka precious chest dan mendapatkan : 
+${pppm > 0 ? `Mora : ${pppm}` : ''}
+${pppxp > 0 ? `EXP : ${pppxp}` : ''}
+${ppppotion > 0 ? `Potion : ${ppppotion}` : ''}
+${pppprimogems > 0 ? `Primogems : ${pppprimogems}` : ''}
+                        `.trim()
+                        if (user.precious >= 100) {
+                            user.precious -= 100
+                            user.potion += ppppotion * 1
+                            user.exp += pppxp * 1
+                            user.mora += pppm * 1
+                            user.primogems += pppprimogems * 1
+                            m.reply(pppstr)
+                        } else m.reply("Precious chest anda tidak cukup!")
+                        break
+                }
+                break
             case 'luxurious':
                 switch (total) {
                     case 'chest':

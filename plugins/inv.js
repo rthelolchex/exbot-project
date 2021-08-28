@@ -9,6 +9,7 @@ let handler = async(m, { conn, text }) => {
     let potion = user.potion
     let common = user.common
     let exquisite = user.exquisite
+    let precious = user.precious
     let luxurious = user.luxurious
     let sampah = user.sampah
     let level = user.level
@@ -30,6 +31,7 @@ Total item : ${potion + sampah} item
 *Chests*
 - Common chest : ${common}
 - Exquisite chest : ${exquisite}
+- Precious chest : ${precious}
 - Luxurious chest : ${luxurious}
 
 - Total chest yang belum dibuka : ${common + exquisite + luxurious} chest

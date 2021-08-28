@@ -5,8 +5,8 @@ const fs = require('fs')
 const crypto = require('crypto')
 
 let handler = async(m, { conn, text }) => {
-    let q = m.quoted ? m.quoted : m
-    let media = await q.download('./tmp/img')
+    let q = { message: { [m.quoted.mtype]: m.quoted }}
+    let media = await conn.downloadAndSaveM(q, './tmp/img')
     await ffmpeg(media)
     .input(media)
     .on('error', function (err) {
@@ -25,6 +25,7 @@ let handler = async(m, { conn, text }) => {
     .save('./tmp/img.webp')
 }
 
-handler.command = /^sticker$/i
+handler.help = ['sticker (reply media atau caption)', 'stiker (reply media atau caption)', 'stickergif (reply media atau caption)', 'stikergif (reply media atau caption)']
+handler.command = /^s(tic?ker)?(gif)?$/i
 
 module.exports = handler

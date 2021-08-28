@@ -3,16 +3,18 @@ let path = require('path')
 let levelling = require('../lib/levelling')
 const defaultMenu = {
   before: `
-╭───《 %me 〕───
+╭───〔 %me 〕───
 ├────────────────────
 ╞═══〔 *USER INFO* 〕═══
 ├────────────────────
 │ Name : %name
 │ Limit tersisa : *%limit*
-│ Money : *%money*
+│ Mora : *%mora*
+│ Primogems : *%primogems*
+│ Potion : *%potion*
 │ Role : *%role*
 │ Level : *%level (%exp / %maxexp)*
-│ [%xp4levelup lagi untuk levelup]
+│ %xp4levelup
 │ Total XP : %totalexp XP
 ├────────────────────
 ╞═══〔 *BOT STATS* 〕═══
@@ -271,7 +273,7 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
   }
   try {
     let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
-    let { exp, limit, level, role, money } = global.db.data.users[m.sender]
+    let { exp, limit, level, role, mora, primogems, potion } = global.db.data.users[m.sender]
     let { min, xp, max } = levelling.xpRange(level, global.multiplier)
     let name = conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
@@ -363,9 +365,9 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
       exp: exp - min,
       maxexp: xp,
       totalexp: exp,
-      xp4levelup: max - exp,
+      xp4levelup: max - exp <= 0 ? `Siap untuk levelup\n| Ketik *${_p}levelup* untuk levelup` : `${max - exp} XP lagi untuk levelup`,
       github: package.homepage ? package.homepage.url || package.homepage : '[unknown github url]',
-      level, limit, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role, money,
+      level, limit, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role, mora, primogems, potion,
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])

@@ -21,6 +21,8 @@ XP: TOTAL ${exp} (${exp - min} / ${xp}) [${math <= 0 ? `Ready to *${usedPrefix}l
 Level: ${level}
 Role: *${role}*
 Mora: *${mora}*
+Primogems : *${primogems}*
+Potion : *${potion}*
 Registered: ${registered ? 'Yes (' + new Date(regTime) + ')': 'No'}
 Premium: ${prem ? 'Yes' : 'No'}${lastclaim > 0 ? '\nLast Claim: ' + new Date(lastclaim) : ''}
 `.trim()

@@ -23,15 +23,15 @@ let handler = async (m, { conn, usedPrefix }) => {
             let common = (_common * 1)
             let _exquisite = `${Math.floor(Math.random() * 2)}`.trim()
             let exquisite = (_exquisite * 1) 
-            let _precious = `${pickRandom(['1', '0', '0', '1'])}`
+            let _precious = `${pickRandom([0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0])}`
             let precious = (_precious * 1)
-            let _luxurious = `${pickRandom(['1', '0', '0', '0'])}`
+            let _luxurious = `${pickRandom([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])}`
             let sampah = `${Math.floor(Math.random() * 300)}`.trim()
             let luxurious = (_luxurious * 1)
             let str = `
-HP mu berkurang -${healt * 1} karena kamu telah berpetualang sampai ${pickRandom(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', `Khaenri'ah`, 'Chasm', 'Celestia', '...'])} dan mendapatkan
+HP mu berkurang -${healt * 1} karena kamu telah berpetualang sampai ${pickRandom(['Mondstadt', 'Liyue', 'Inazuma', 'Sumeru', `Khaenri'ah`, 'Chasm', 'Celestia', 'Markas Abyss Order', 'Snezhnaya'])} dan mendapatkan
 *Exp:* ${exp} 
-*mora:* ${mora}
+*Mora:* ${mora}
 *Sampah:* ${sampah}${potion == 0 ? '' : '\n*Potion:* ' + potion + ''}${common == 0 ? '' : '\n*Common chest:* ' + common + ''}${exquisite == 0 ? '' : '\n*Exquisite chest:* ' + exquisite + ''}
 `.trim()
             conn.reply(m.chat, str, m)
