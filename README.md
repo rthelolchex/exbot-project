@@ -12,8 +12,8 @@ apt install git -y
 apt install nodejs -y
 apt install ffmpeg -y
 apt install imagemagick -y
-git clone https://github.com/Nurutomo/wabot-aq
-cd wabot-aq
+git clone https://github.com/rthelolchex/exbot-project
+cd exbot-project
 npm install
 npm update
 ```
@@ -47,8 +47,8 @@ apt install wget curl git ffmpeg imagemagick build-essential libcairo2-dev libpa
 ubuntu
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 apt install -y nodejs gcc g++ make
-git clone https://github.com/Nurutomo/wabot-aq
-cd wabot-aq
+git clone https://github.com/rthelolchex/exbot-project
+cd exbot-project
 npm install
 npm update
 ```
@@ -193,6 +193,7 @@ conn.logger.level = 'debug'
 ```
 
 ---------
+
 
  [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![rthelolchex](https://github.com/rthelolchex.png?size=100)](https://github.com/rthelolchex)
 ----|----
