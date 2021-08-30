@@ -92,13 +92,13 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
     'admin': `Admin ${global.opts['restrict'] ? '' : '(Dinonaktifkan)'}`,
   }
   if (teks === 'group') tags = {
-    'Group': 'Group',
+    'group': 'Group',
   }
   if (teks === 'owner') tags = {
-    'Owner': 'Owner',
+    'owner': 'Owner',
   }
   if (teks === 'premium') tags = {
-    'Premium': 'Premium',
+    'premium': 'Premium',
   }
   if (teks === 'internet') tags = {
     'internet': 'Internet',
@@ -119,7 +119,7 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
     'fun': 'Fun',
   }
   if (teks === 'vote') tags = {
-    'Vote': 'vote',
+    'vote': 'vote',
   }
   if (teks === 'database') tags = {
     'database': 'Database',
