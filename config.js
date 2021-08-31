@@ -20,6 +20,12 @@ global.APIKeys = { // APIKey Here
   'https://leyscoders-api.herokuapp.com': 'dappakntlll'
 }
 
+// Messages
+global.msg = {
+  wait: "_Silahkan tunggu sebentar..._",
+  fail: "_Terjadi kesalahan, silahkan coba lagi._"
+}
+
 // Sticker WM
 global.packname = `Ini weem bang`
 global.author = `Ido | ExBot - Project`
