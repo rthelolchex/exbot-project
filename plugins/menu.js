@@ -9,9 +9,6 @@ const defaultMenu = {
 ├────────────────────
 │ Name : %name
 │ Limit tersisa : *%limit*
-│ Mora : *%mora*
-│ Primogems : *%primogems*
-│ Potion : *%potion*
 │ Role : *%role*
 │ Level : *%level (%exp / %maxexp)*
 │ %xp4levelup
