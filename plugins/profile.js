@@ -20,9 +20,6 @@ Number: ${PhoneNumber('+' + who.replace('@s.whatsapp.net', '')).getNumber('inter
 XP: TOTAL ${exp} (${exp - min} / ${xp}) [${math <= 0 ? `Ready to *${usedPrefix}levelup*` : `${math} XP left to levelup`}]
 Level: ${level}
 Role: *${role}*
-Mora: *${mora}*
-Primogems : *${primogems}*
-Potion : *${potion}*
 Registered: ${registered ? 'Yes (' + new Date(regTime) + ')': 'No'}
 Premium: ${prem ? 'Yes' : 'No'}${lastclaim > 0 ? '\nLast Claim: ' + new Date(lastclaim) : ''}
 `.trim()

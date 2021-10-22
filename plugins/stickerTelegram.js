@@ -2,8 +2,6 @@ const fetch = require('node-fetch')
 const { MessageType } = require('@adiwajshing/baileys')
 const { sticker } = require('../lib/sticker')
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    let packname = `Ini weem bang`
-    let author = `Ido | ExBot - Project`
     if (!args[0]) throw `*Perintah ini untuk mengambil stiker dari Telegram*\n\ncontoh:\n${usedPrefix + command} https://t.me/addstickers/menggokil`
     if (!args[0].match(/(https:\/\/t.me\/addstickers\/)/gi)) throw `*Link salah! Perintah ini untuk mengambil stiker dari Telegram*\n\ncontoh:\n${usedPrefix + command} https://t.me/addstickers/menggokil`
 

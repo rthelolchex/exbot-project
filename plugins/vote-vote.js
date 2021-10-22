@@ -26,12 +26,12 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ╞═══ 《 *UPVOTE* 》 ═══
 ├────────────────────
 │ Total: ${upvote.length}
-│ ${upvote.map(u => '@' + u.split('@')[0]).join('\n')}
+│ ${upvote.map(u => '@' + u.split('@')[0]).join('\n| ')}
 ├────────────────────
 ╞═══ 《 *DEVOTE* 》 ═══
 ├────────────────────
 │ Total: ${devote.length} 
-│ ${devote.map(u => '@' + u.split('@')[0]).join('\n')}
+│ ${devote.map(u => '@' + u.split('@')[0]).join('\n| ')}
 ├────────────────────
 │ Klik tombol dibawah jika ingin hapus vote
 │ Atau jika tombol sudah abu-abu,

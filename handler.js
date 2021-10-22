@@ -41,15 +41,6 @@ module.exports = {
           if (!isNumber(user.level)) user.level = 0
           if (!user.role) user.role = 'Beginner'
           if (!('autolevelup' in user)) user.autolevelup = false
-          if (!isNumber(user.lastadventure)) user.lastadventure = 0
-          if (!isNumber(user.mora)) user.mora = 1000
-          if (!isNumber(user.potion)) user.potion = 3
-          if (!isNumber(user.healt)) user.healt = 100
-          if (!isNumber(user.primogems)) user.primogems = 0
-          if (!isNumber(user.exquisite)) user.exquisite = 0
-          if (!isNumber(user.common)) user.common = 0
-          if (!isNumber(user.luxurious)) user.luxurious = 100
-          if (!isNumber(user.sampah)) user.sampah = 0
         } else global.db.data.users[m.sender] = {
           exp: 0,
           limit: 10,
@@ -64,15 +55,6 @@ module.exports = {
           level: 0,
           role: 'Beginner',
           autolevelup: false,
-          healt: 100,
-          mora: 1000,
-          potion: 3,
-          primogems: 0,
-          common: 0,
-          exquisite: 0,
-          luxurious: 0,
-          sampah: 0,
-          lastadventure: 0,
         }
 
         let chat = global.db.data.chats[m.chat]
@@ -303,7 +285,7 @@ module.exports = {
                 console.error(e)
               }
             }
-            if (m.limit) m.reply(+ m.limit + ' Limit terpakai')
+            // if (m.limit) m.reply(+ m.limit + ' Limit terpakai') // Terlalu risih wkowk
           }
           break
         }
