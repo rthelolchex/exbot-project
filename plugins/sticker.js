@@ -3,11 +3,32 @@ const { addExif } = require('../lib/exif')
 const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const crypto = require('crypto')
+const { removeBackgroundFromImageFile } = require('remove.bg')
+const keyrmbg = 'HuTPUXBBSPA2umFVbFTmyUe2'
+const { exec } = require('child_process')
 
 let handler = async(m, { conn, text }) => {
-    let q = { message: { [m.quoted.mtype]: m.quoted }}
-    let media = await conn.downloadAndSaveM(q, './tmp/img')
-    await ffmpeg(media)
+    let q = m.quoted ? m.quoted : m
+    let media = await q.download('./tmp/img')
+    let ranp = './tmp/img_nobg.png'
+    let ranw = './tmp/img_nobg.webp'
+    if (text === "nobg") {
+      await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg, size: 'auto', type: 'auto', ranp}).then(res => {
+							fs.unlinkSync(media)
+							let buffer = Buffer.from(res.base64img, 'base64')
+							fs.writeFileSync(ranp, buffer, (err) => {
+								if (err) return m.reply('Gagal, Terjadi kesalahan, silahkan coba beberapa saat lagi.')
+							})
+							exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, async (err) => {
+								fs.unlinkSync(ranp)
+								if (err) return m.reply("Terjadi kesalahan.")
+								snobg = await addExif(fs.readFileSync('./tmp/img_nobg.webp'), global.packname, global.author)
+									conn.sendMessage(m.chat, snobg, MessageType.sticker, {quoted: m})
+									fs.unlinkSync(ranw)
+								})
+							})
+						}
+    else await ffmpeg(media)
     .input(media)
     .on('error', function (err) {
         console.log("Error : " + err)
@@ -26,6 +47,6 @@ let handler = async(m, { conn, text }) => {
 }
 
 handler.help = ['sticker (reply media atau caption)', 'stiker (reply media atau caption)', 'stickergif (reply media atau caption)', 'stikergif (reply media atau caption)']
-handler.command = /^s(tic?ker)?(gif)?$/i
+handler.command = /^s(tic?ker)?(gif)?(wm)?$/i
 
 module.exports = handler
