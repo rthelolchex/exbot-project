@@ -1,6 +1,7 @@
 let fs = require('fs')
 let path = require('path')
 let levelling = require('../lib/levelling')
+let fetch = require('node-fetch')
 const defaultMenu = {
   before: `
 ╭───〔 %me 〕───
@@ -9,6 +10,9 @@ const defaultMenu = {
 ├────────────────────
 │ Name : %name
 │ Limit tersisa : *%limit*
+│ Mora : *%mora*
+│ Primogems : *%primogems*
+│ Potion : *%potion*
 │ Role : *%role*
 │ Level : *%level (%exp / %maxexp)*
 │ %xp4levelup
@@ -142,6 +146,9 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
   if (teks === 'maker') tags = {
     'maker': "Maker",
   }
+  if (teks === 'gi') tags = {
+    'gi': "Genshin Impact"
+  }
   if (!args[0]) {
     conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
       "listMessage": {
@@ -155,107 +162,111 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
               {
                 "title": "Semua menu",
                 "description": "",
-                "rowId": `.menu all`
+                "rowId": `${_p}menu all`
               }, {
                 "title": "Game Menu",
                 "description": "",
-                "rowId": `.menu game`
+                "rowId": `${_p}menu game`
+              }, {
+                "title": "Genshin Impact",
+                "description": "",
+                "rowId": `${_p}menu gi`
               }, {
                 "title": "Exp & Limit Menu",
                 "description": "",
-                "rowId": `.menu xp`
+                "rowId": `${_p}menu xp`
               }, {
                 "title": "Sticker Menu",
                 "description": "",
-                "rowId": `.menu sticker`
+                "rowId": `${_p}menu sticker`
               }, {
                 "title": "Kerang Ajaib Menu",
                 "description": "",
-                "rowId": `.menu kerang`
+                "rowId": `${_p}menu kerang`
               }, {
                 "title": "Quotes Menu",
                 "description": "",
-                "rowId": `.menu quotes`
+                "rowId": `${_p}menu quotes`
               }, {
                 "title": "Admin Menu",
                 "description": "",
-                "rowId": `.menu admin`
+                "rowId": `${_p}menu admin`
               }, {
                 "title": "Group Menu",
                 "description": "",
-                "rowId": `.menu Group`
+                "rowId": `${_p}menu Group`
               }, {
                 "title": "Premium Menu",
                 "description": "",
-                "rowId": `.menu premium`
+                "rowId": `${_p}menu premium`
               }, {
                 "title": "Internet Menu",
                 "description": "",
-                "rowId": `.menu internet`
+                "rowId": `${_p}menu internet`
               }, {
                 "title": "Anonymous Chat Menu",
                 "description": "",
-                "rowId": `.menu anonymous`
+                "rowId": `${_p}menu anonymous`
               }, {
                 "title": "Magernulis & Logo Menu",
                 "description": "",
-                "rowId": `.menu nulis`
+                "rowId": `${_p}menu nulis`
               }, {
                 "title": "Downloader Menu",
                 "description": "",
-                "rowId": `.menu downloader`
+                "rowId": `${_p}menu downloader`
               }, {
                 "title": "Tools Menu",
                 "description": "",
-                "rowId": `.menu tools`
+                "rowId": `${_p}menu tools`
               }, {
                 "title": "Fun Menu",
                 "description": "",
-                "rowId": `.menu fun`
+                "rowId": `${_p}menu fun`
               }, {
                 "title": "Database Menu",
                 "description": "",
-                "rowId": `.menu xp`
+                "rowId": `${_p}menu xp`
               }, {
                 "title": "Voting Menu",
                 "description": "",
-                "rowId": `.menu vote`
+                "rowId": `${_p}menu vote`
               }, {
                 "title": "Absen Menu",
                 "description": "",
-                "rowId": `.menu absen`
+                "rowId": `${_p}menu absen`
               }, {
                 "title": "Al Qur\'an Menu",
                 "description": "",
-                "rowId": `.menu quran`
+                "rowId": `${_p}menu quran`
               }, {
                 "title": "Jadi Bot Menu",
                 "description": "",
-                "rowId": `.menu jadibot`
+                "rowId": `${_p}menu jadibot`
               }, {
                 "title": "Owner Menu",
                 "description": "",
-                "rowId": `.menu owner`
+                "rowId": `${_p}menu owner`
               }, {
                 "title": "Host Menu",
                 "description": "",
-                "rowId": `.menu host`
+                "rowId": `${_p}menu host`
               }, {
                 "title": "Advanced Menu",
                 "description": "",
-                "rowId": `.menu advanced`
+                "rowId": `${_p}menu advanced`
               }, {
                 "title": "Info Menu",
                 "description": "",
-                "rowId": `.menu info`
+                "rowId": `${_p}menu info`
               }, {
                 "title": "Pengubah Suara Menu",
                 "description": "",
-                "rowId": `.menu voicechanger`
+                "rowId": `${_p}menu voicechanger`
               }, {
                 "title": "Maker Menu",
                 "description": "",
-                "rowId": `.menu maker`
+                "rowId": `${_p}menu maker`
               },
             ]
           }
@@ -362,13 +373,13 @@ let handler = async (m, { conn, usedPrefix: _p, args }) => {
       exp: exp - min,
       maxexp: xp,
       totalexp: exp,
-      xp4levelup: max - exp <= 0 ? `Siap untuk levelup\n| Ketik *${_p}levelup* untuk levelup` : `${max - exp} XP lagi untuk levelup`,
+      xp4levelup: max - exp <= 0 ? `| Siap untuk levelup\n| Ketik *${_p}levelup* untuk levelup` : `${max - exp} XP lagi untuk levelup`,
       github: package.homepage ? package.homepage.url || package.homepage : '[unknown github url]',
       level, limit, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role, mora, primogems, potion,
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    conn.send2Button(m.chat, text.trim(), 'Made with hand by rthelolchex', 'Owner bot', '.owner', 'Donate', '.donate', { quoted: m })
+    await conn.send2ButtonLoc(m.chat, await (await fetch(fla + tags[teks])).buffer(), text.trim(), 'Made with hand by rthelolchex', 'Pemilik Bot', `${_p}owner`, 'Donasi', `${_p}donasi`, m)
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
