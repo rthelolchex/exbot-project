@@ -198,4 +198,5 @@ conn.logger.level = 'debug'
  [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![rthelolchex](https://github.com/rthelolchex.png?size=100)](https://github.com/rthelolchex)
 ----|----
 [Nurutomo](https://github.com/Nurutomo) | [rthelolchex](https://github.com/rthelolchex)
- Author / Creator | Recode/Remake
+ Author / Creator | Recode/Remake | [omxpro](https://github.com/omxpro)
+ Co Creator/ Translater| Translated the Repository
