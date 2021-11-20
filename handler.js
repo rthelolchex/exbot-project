@@ -89,7 +89,7 @@ module.exports = {
           status: 0,
         }
       } catch (e) {
-        console.error(e)
+        console.error (e)
       }
       if (opts['nyimak']) return
       if (!m.fromMe && opts['self']) return
@@ -107,7 +107,7 @@ module.exports = {
           await plugin.all.call(this, m, chatUpdate)
         } catch (e) {
           if (typeof e === 'string') continue
-          console.error(e)
+          console.error (e)
         }
       }
       if (m.isBaileys) return
@@ -124,9 +124,9 @@ module.exports = {
       let participants = m.isGroup ? groupMetadata.participants : [] || []
       let user = m.isGroup ? participants.find(u => u.jid == m.sender) : {} // Data pengguna
       let bot = m.isGroup ? participants.find(u => u.jid == this.user.jid) : {} // Data anda
-      let isAdmin = user.isAdmin || user.isSuperAdmin || false // Apakah pengguna admin?
-      let isBotAdmin = bot.isAdmin || bot.isSuperAdmin || false // Apakah anda admin?
-      if (!isOwner && opts['owneronly']) return // Ntah kenapa gabisa difix diatas, mager juga w btw
+      let isAdmin = user.isAdmin || user.isSuperAdmin || false // Is it an admin user?
+      let isBotAdmin = bot.isAdmin || bot.isSuperAdmin || false // Are you an admin?
+      if (!isOwner && opts['owneronly']) return // I don't know why it can't be fixed above, it's slow w btw
       for (let name in global.plugins) {
         let plugin = global.plugins[name]
         if (!plugin) continue
@@ -169,7 +169,7 @@ module.exports = {
           let _args = noPrefix.trim().split` `.slice(1)
           let text = _args.join` `
           command = (command || '').toLowerCase()
-          let fail = plugin.fail || global.dfail // Ketika gagal
+          let fail = plugin.fail || global.dfail // When it fails
           let isAccept = plugin.command instanceof RegExp ? // RegExp Mode?
             plugin.command.test(command) :
             Array.isArray(plugin.command) ? // Array?
@@ -186,7 +186,7 @@ module.exports = {
           if (m.chat in global.db.data.chats || m.sender in global.db.data.users) {
             let chat = global.db.data.chats[m.chat]
             let user = global.db.data.users[m.sender]
-            if (name != 'unbanchat.js' && chat && chat.isBanned) return // Kecualikan ini, yang dibawah bisa dipake juga
+            if (name != 'unbanchat.js' && chat && chat.isBanned) return // Exclude this, the following works as well
             if (name != 'unbanuser.js' && user && user.banned) return
           }
           if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Keduanya owner
@@ -227,7 +227,7 @@ module.exports = {
             fail('unreg', m, this)
             continue
           }
-          if (plugin.maintenance == true && !isOwner) { // Biar ga diintip orang wkwkwk
+          if (plugin.maintenance == true && !isOwner) { // Don't let anyone peek
             fail('maintenance', m, this)
             continue
           }
@@ -237,12 +237,12 @@ module.exports = {
           if (xp > 200) m.reply('Ngecit -_-') // Hehehe
           else m.exp += xp
           if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-            this.reply(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`, m)
-            continue // Limit habis
+            this.reply(m.chat, `Your limit is out, please buy via *${usedPrefix}buy*`, m)
+            continue // Limit exhausted
           }
           if (plugin.level > _user.level) {
-            this.reply(m.chat, `diperlukan level ${plugin.level} untuk menggunakan perintah ini. Level kamu ${_user.level}`, m)
-            continue // Jika level tidak tercapai
+            this.reply(m.chat, `required level ${plugin.level} to use this command. Your level is ${_user.level}`, m)
+            continue // If level is not reached
           }
           let extra = {
             match,
@@ -268,10 +268,10 @@ module.exports = {
             await plugin.call(this, m, extra)
             if (!isPrems) m.limit = m.limit || plugin.limit || false
           } catch (e) {
-            // Jika terjadi error
+            // If an error occurs
             m.error = e
             if (e) {
-              let text = util.format(e)
+              let text = util.format (e)
               for (let key of Object.values(global.APIKeys))
                 text = text.replace(new RegExp(key, 'g'), '#HIDDEN#')
               m.reply(text)
@@ -282,10 +282,10 @@ module.exports = {
               try {
                 await plugin.after.call(this, m, extra)
               } catch (e) {
-                console.error(e)
+                console.error (e)
               }
             }
-            // if (m.limit) m.reply(+ m.limit + ' Limit terpakai') // Terlalu risih wkowk
+            // if (m.limit) m.reply(+ m.limit + ' Limit used') // Too awkward wkowk
           }
           break
         }
@@ -375,9 +375,9 @@ module.exports = {
     let chat = global.db.data.chats[m.key.remoteJid]
     if (chat.delete) return
     await this.reply(m.key.remoteJid, `
-Terdeteksi @${m.participant.split`@`[0]} telah menghapus pesan
+Detected @${m.participant.split`@`[0]} has deleted message
 
-Untuk mematikan fitur ini, ketik
+To turn off this feature, type
 *.enable delete*
 `.trim(), m.message, {
       contextInfo: {
@@ -397,23 +397,23 @@ Untuk mematikan fitur ini, ketik
           return
         break
     }
-    await this.sendMessage(from, 'Maaf, karena anda menelfon bot. anda diblokir otomatis', MessageType.extendedText)
+    await this.sendMessage(from, 'Sorry, you are calling the bot. You are automatically blocked', MessageType.extendedText)
     await this.blockUser(from, 'add')
   }
 }
 
 global.dfail = (type, m, conn) => {
   let msg = {
-    rowner: 'Perintah ini hanya dapat digunakan oleh _*OWWNER!1!1!*_',
-    owner: 'Perintah ini hanya dapat digunakan oleh _*Owner Bot*_!',
-    mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_ !',
-    premium: 'Perintah ini hanya untuk member _*Premium*_ !',
-    group: 'Perintah ini hanya dapat digunakan di grup!',
-    private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
-    admin: 'Perintah ini hanya untuk *Admin* grup!',
-    botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
-    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Manusia.16*',
-    maintenance: 'Fitur ini sedang dalam pembangunan, so stay tuned for the updates!'
+    rowner: 'This command can only be used by _*OWWNER! 1! 1!*_',
+    owner: 'This command can only be used by _*Owner Bot*_!',
+    mods: 'This command can only be used by _*Moderators*_!',
+    premium: 'This order is only for members _*Premium*_!',
+    group: 'This command can only be used in groups!',
+    private: 'This command can only be used in Private Chat!',
+    admin: 'This command is for *Admin* group only!',
+    botAdmin: 'Make bot * Admin * to use this command!',
+    unreg: 'Please register to use this feature by typing:\n\n*#name.age list*\n\nExample: *#Human list.16*',
+    maintenance: 'This feature is under construction, so stay tuned for the updates!'
   }[type]
   if (msg) return m.reply(msg)
 }
