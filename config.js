@@ -14,22 +14,22 @@ global.APIs = { // API Prefix
 global.APIKeys = { // APIKey Here
   // 'https://website': 'apikey'
   'https://api.xteam.xyz': 'd90a9e986e18778b',
-  'https://zahirr-web.herokuapp.com': 'zahirgans',
-  'https://api.zeks.me': 'rthelolchex',
-  'https://pencarikode.xyz': 'pais',
-  'https://leyscoders-api.herokuapp.com': 'dappakntlll'
-}
+  'https://zahirr-web.herokuapp.com': 'zahirgans', 
+  'https://api.zeks.me': 'rthelolchex', 
+  'https://pencarikode.xyz': 'pais', 
+  'https ://leyscoders-api.herokuapp.com': 'dappakntlll' 
+} 
 
-// Messages
-global.msg = {
-  wait: "_Silahkan tunggu sebentar..._",
-  fail: "_Terjadi kesalahan, silahkan coba lagi._"
-}
-global.fla = 'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=sketch-name&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextType=1&fillTextPattern=Warning!&text='
+// Messages 
+global.msg = { 
+  wait: "_Please wait a moment..._", 
+  file: "_An error occurred, please try again._" 
+} 
+global .fla = 'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=sketch-name&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextType=1&fillTextPattern=Warning!&text=' 
 
-// Sticker WM
-global.packname = `Ini weem bang`
-global.author = `Ido | ExBot - Project`
+// Sticker WM 
+global .packname = `It's a weem bang` 
+global.author = `Ido | ExBot - Project V2`
 
 global.multiplier = 69 // The higher, The harder levelup
 
